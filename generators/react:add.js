@@ -28,7 +28,7 @@ switch (type) {
 import './${capitalizedName}.css';
 
 type Props = {
-  ${args.map(arg => `${arg}: `).join("\n  ")}
+  ${args.map(arg => `${arg}: any;`).join("\n  ")}
 };
 
 const ${capitalizedName}: React.FC<Props> = props => {
@@ -43,13 +43,13 @@ const ${capitalizedName}: React.FC<Props> = props => {
 
 export default ${capitalizedName};`;
 
-    fs.writeFileSync(`./components/${capitalizedName}.tsx`, component);
+    fs.writeFileSync(`./src/components/${capitalizedName}.tsx`, component);
 
     const style = `.${dashedName} {
 
 }`;
 
-    fs.writeFileSync(`./components/${capitalizedName}.css`, style);
+    fs.writeFileSync(`./src/components/${capitalizedName}.css`, style);
 
     if (hasStorybook) {
       const storybook = `import * as React from 'react';
@@ -66,7 +66,7 @@ stories.add('default', () => (
 ));`;
 
       fs.writeFileSync(
-        `./components/${capitalizedName}.stories.tsx`,
+        `./src/components/${capitalizedName}.stories.tsx`,
         storybook
       );
     }
@@ -101,7 +101,7 @@ ${args
   .join("\n")}
 `;
 
-    fs.writeFileSync(`./ducks/${name}/actions.ts`, actions);
+    fs.writeFileSync(`./src/ducks/${name}/actions.ts`, actions);
 
     const reducer = `import Action from '../Action';
 import * as actions from './actions';
@@ -130,7 +130,7 @@ export default function reducer(state: State = initialState, action: Action): St
 }
 `;
 
-    fs.writeFileSync(`./ducks/${name}/reducer.ts`, reducer);
+    fs.writeFileSync(`./src/ducks/${name}/reducer.ts`, reducer);
 
     // TODO: Update rootReducer and Action
   }
